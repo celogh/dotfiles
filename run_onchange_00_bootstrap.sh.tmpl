@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ansible-playbook {{ joinPath .chezmoi.sourceDir "dot_bootstrap/setup.yml" | quote }} --ask-become-pass 

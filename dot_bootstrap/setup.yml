@@ -1,0 +1,31 @@
+---
+
+name: Bootstrap personal Linux PC
+hosts: localhost
+connection: local
+
+vars:
+  packages:
+    - neovim
+    - npm
+    - tmux
+    - fish
+    - fisher
+    - ripgrep
+
+tasks:
+  - name: "Install | {{ item }}"
+    package:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ packages }}"
+
+  #  - name: Install | JetBrains Mono Nerd font
+    #  Only if terminal is running in host OS
+  - name: Install | tmux package manager
+    git:
+      repo: https://github.com/tmux-plugins/tpm
+      dest: ~/.tmux/plugins/tpm
+    
+  - name: Install | fish tide plugin
+    cmd: fisher install ilancosman/tide@v5
