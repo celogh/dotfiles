@@ -1,4 +1,4 @@
--- Vim settings
+vim.g.mapleader = " "
 
 --vim.opt.guicursor = ""
 
@@ -30,5 +30,3 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 1000
 
 vim.opt.colorcolumn = "80"
-
-vim.g.mapleader = " "
