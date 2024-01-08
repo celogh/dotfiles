@@ -1,31 +1,43 @@
 ---
 
-name: Bootstrap personal Linux PC
-hosts: localhost
-connection: local
+- name: Bootstrap personal Linux PC
+  hosts: localhost
+  connection: local
+  gather_facts: true
 
-vars:
-  packages:
-    - neovim
-    - npm
-    - tmux
-    - fish
-    - fisher
-    - ripgrep
+  vars:
+    packages:
+      - neovim
+      - npm
+      - tmux
+      - fish
+      - fisher
+      - ripgrep
 
-tasks:
-  - name: "Install | {{ item }}"
-    package:
-      name: "{{ item }}"
-      state: present
-    loop: "{{ packages }}"
+  tasks:
+    - name: Prepare | Get my user
+      ansible.builtin.set_fact:
+        remote_regular_user: "{{ ansible_user_id }}"
 
-  #  - name: Install | JetBrains Mono Nerd font
-    #  Only if terminal is running in host OS
-  - name: Install | tmux package manager
-    git:
-      repo: https://github.com/tmux-plugins/tpm
-      dest: ~/.tmux/plugins/tpm
-    
-  - name: Install | fish tide plugin
-    cmd: fisher install ilancosman/tide@v5
+    - name: "Install (system-wide) | {{ item }}"
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      become: true
+      loop: "{{ packages }}"
+
+        #  - name: Install | JetBrains Mono Nerd font
+        #  Only if terminal is running in host OS
+    - name: Install (personal) | tmux package manager
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.tmux/plugins/tpm
+
+    - name: Install (personal) | fish tide plugin
+      ansible.builtin.command: fisher install ilancosman/tide@v5
+
+    - name: Config | Change shell to fish
+      ansible.builtin.user:
+        name: "{{ remote_regular_user }}"
+        shell: /usr/bin/fish
+      become: true
