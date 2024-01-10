@@ -19,7 +19,7 @@
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_user_id }}"
 
-    - name: "Install (system-wide) | {{ item }}"
+    - name: "Install (system-wide) | Packages"
       ansible.builtin.package:
         name: "{{ item }}"
         state: present
@@ -34,7 +34,7 @@
         dest: ~/.tmux/plugins/tpm
 
     - name: Install (personal) | fish tide plugin
-      ansible.builtin.command: fisher install ilancosman/tide@v5
+      ansible.builtin.command: fish -c "fisher install ilancosman/tide@v5"
 
     - name: Config | Change shell to fish
       ansible.builtin.user:
