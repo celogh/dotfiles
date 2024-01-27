@@ -3,3 +3,5 @@
 	name = Laurent Chauvirey
 [credential]
 	helper = cache
+[init]
+	defaultBranch = main

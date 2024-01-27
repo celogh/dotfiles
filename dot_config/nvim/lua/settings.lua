@@ -32,3 +32,5 @@ vim.opt.updatetime = 1000
 vim.opt.colorcolumn = "80"
 
 vim.opt.paste = true
+
+vim.opt.clipboard = 'unnamedplus'

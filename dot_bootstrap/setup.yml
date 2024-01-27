@@ -7,24 +7,32 @@
 
   vars:
     packages:
-      - neovim
+      - neovim>=0.9
       - npm
       - tmux
       - fish
       - fisher
       - ripgrep
+      - lazygit
 
   tasks:
     - name: Prepare | Get my user
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_user_id }}"
 
-    - name: "Install (system-wide) | Packages"
+    - name: Install (system-wide) | Packages
       ansible.builtin.package:
         name: "{{ item }}"
         state: present
       become: true
       loop: "{{ packages }}"
+      register: pkg_state
+
+    - name: Install (personal) | Neovim if not packaged
+      ansible.builtin.get_url:
+        url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+        dest: /tmp
+      when: not pkg_state
 
         #  - name: Install | JetBrains Mono Nerd font
         #  Only if terminal is running in host OS
