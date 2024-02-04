@@ -28,14 +28,6 @@
       loop: "{{ packages }}"
       register: pkg_state
 
-    - name: Install (personal) | Neovim if not packaged
-      ansible.builtin.get_url:
-        url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-        dest: /tmp
-      when: not pkg_state
-
-        #  - name: Install | JetBrains Mono Nerd font
-        #  Only if terminal is running in host OS
     - name: Install (personal) | tmux package manager
       ansible.builtin.git:
         repo: https://github.com/tmux-plugins/tpm
