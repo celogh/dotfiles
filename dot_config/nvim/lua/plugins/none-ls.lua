@@ -17,7 +17,7 @@ return {
 		})
 		vim.keymap.set(
 			"n",
-			"<leader>gf",
+			"<leader>cf",
 			vim.lsp.buf.format,
 			{ desc = "Formats a buffer using LSP" }
 		)

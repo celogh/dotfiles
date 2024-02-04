@@ -37,10 +37,10 @@ return {
 					-- Enable completion triggered by <c-x><c-o>
 					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-					vim.keymap.set("n", "<leader>gk", vim.lsp.buf.hover, { desc = "Hover definition" })
-					vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Goto definition" })
-					vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Display references" })
-					vim.keymap.set("n", "<leader>ga", vim.lsp.buf.code_action, { desc = "Code action" })
+					vim.keymap.set("n", "<leader>ck", vim.lsp.buf.hover, { desc = "Hover definition" })
+					vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Goto definition" })
+					vim.keymap.set("n", "<leader>cr", vim.lsp.buf.references, { desc = "Display references" })
+					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 				end,
 			})
 		end,
