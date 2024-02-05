@@ -1,0 +1,7 @@
+distrib_packages:
+  - npm
+  - tmux
+  - fish
+  - fisher
+  - ripgrep
+  - lazygit

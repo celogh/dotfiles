@@ -5,33 +5,30 @@
   connection: local
   gather_facts: true
 
+  vars_files:
+    - "vars_{{ ansible_os_family | lower }}.yml"
   vars:
-    packages:
-      - neovim>=0.9
-      - npm
-      - tmux
-      - fish
-      - fisher
-      - ripgrep
-      - lazygit
+    github_packages:
+      - { name: "tmux-plugins/tpm", dest: "~/.tmux/plugins/tpm" }
 
   tasks:
     - name: Prepare | Get my user
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_user_id }}"
 
-    - name: Install (system-wide) | Packages
+    - name: Install (system-wide) | Distribution integrated packages
       ansible.builtin.package:
         name: "{{ item }}"
         state: present
       become: true
-      loop: "{{ packages }}"
+      loop: "{{ distrib_packages }}"
       register: pkg_state
 
-    - name: Install (personal) | tmux package manager
+    - name: Install (personal) | Github provided packages
       ansible.builtin.git:
-        repo: https://github.com/tmux-plugins/tpm
-        dest: ~/.tmux/plugins/tpm
+        repo: "https://github.com/{{ item.name }}"
+        dest: "{{ item.dest }}"
+      loop: "{{ github_packages }}"
 
     - name: Install (personal) | fish tide plugin
       ansible.builtin.command: fish -c "fisher install ilancosman/tide@v5"
