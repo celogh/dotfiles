@@ -4,4 +4,3 @@ distrib_packages:
   - fish
   - fisher
   - ripgrep
-  - lazygit
