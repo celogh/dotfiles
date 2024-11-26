@@ -1,0 +1,14 @@
+---
+
+- name: Config (system-wide) | Add unstable repository to apt
+  ansible.builtin.apt_repository:
+    repo: deb http://deb.debian.org/debian unstable main contrib
+    state: present
+
+- name: Install (system-wide) | Install neovim package from unstable Debian
+  ansible.builtin.apt:
+    name: neovim
+    state: latest
+    default_release: unstable
+    update_cache: yes
+    cache_valid_time: 3600
