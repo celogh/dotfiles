@@ -16,8 +16,11 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ### Way #2
 
 ```shell
-sudo pacman -Sy chezmoi [or] sudo apt install chezmoi
-export GITHUB_USERNAME=celogh
+if [ -f /etc/debian_version ]; then
+  sudo apt install chezmoi
+elif [ -f /etc/arch-release ]; then
+  sudo pacman -Sy chezmoi
+fi
 chezmoi init https://github.com/celogh/dotfiles.git
 chezmoi apply -v
 ```
