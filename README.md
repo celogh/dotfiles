@@ -9,6 +9,7 @@ This automated setup is currently only configured for Arch machines.
 ### Binary install way
 
 ```shell
+# Prerequisite : curl
 export GITHUB_USERNAME=celogh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ```
