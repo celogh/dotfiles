@@ -6,18 +6,19 @@ This automated setup is currently only configured for Arch machines.
 
 ## How to run
 
-### Way #1
+### Binary install way
 
 ```shell
 export GITHUB_USERNAME=celogh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ```
 
-### Way #2
+### Packaged way
 
 ```shell
 if [ -f /etc/debian_version ]; then
-  sudo apt install chezmoi
+  #sudo apt install chezmoi
+  echo "No package for this distro, use binary install"
 elif [ -f /etc/arch-release ]; then
   sudo pacman -Sy chezmoi
 fi
