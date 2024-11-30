@@ -6,7 +6,18 @@ This automated setup is currently only configured for Arch machines.
 
 ## How to run
 
+### Way #1
+
 ```shell
 export GITHUB_USERNAME=celogh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+```
+
+### Way #2
+
+```shell
+sudo pacman -Sy chezmoi [or] sudo apt install chezmoi
+export GITHUB_USERNAME=celogh
+chezmoi init https://github.com/celogh/dotfiles.git
+chezmoi apply -v
 ```
