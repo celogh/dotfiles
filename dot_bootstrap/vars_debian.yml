@@ -1,6 +1,7 @@
 distrib_packages:
+  - file
   - npm
   - tmux
   - fish
-  - fisher
+#  - fisher # "No package matching 'fisher' is available
   - ripgrep

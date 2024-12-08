@@ -30,11 +30,14 @@
         dest: "{{ item.dest }}"
       loop: "{{ github_packages }}"
 
-    - name: Install (personal) | fish tide plugin
-      ansible.builtin.command: fish -c "fisher install ilancosman/tide@v5"
+    # - name: Install (personal) | Fish tide plugin
+    #   ansible.builtin.command: fish -c "fisher install ilancosman/tide@v5"
 
-    - name: Config | Change shell to fish
+    - name: Config (personal) | Change shell to fish
       ansible.builtin.user:
         name: "{{ remote_regular_user }}"
         shell: /usr/bin/fish
       become: true
+
+    - name: Execute | OS specific tasks
+      ansible.builtin.include_tasks: "tasks_{{ ansible_os_family | lower }}.yml"

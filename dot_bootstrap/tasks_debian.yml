@@ -4,7 +4,7 @@
   ansible.builtin.apt_repository:
     repo: deb http://deb.debian.org/debian unstable main contrib
     state: present
-  enable: true
+  become: true
 
 - name: Install (system-wide) | Install neovim package from unstable Debian
   ansible.builtin.apt:
@@ -13,4 +13,4 @@
     default_release: unstable
     update_cache: yes
     cache_valid_time: 3600
-  enable: true
+  become: true
