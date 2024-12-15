@@ -1,0 +1,8 @@
+distrib_packages:
+  - neovim>=0.9
+  - npm
+  - tmux
+  - fish
+  - fisher
+  - ripgrep
+  - lazygit
