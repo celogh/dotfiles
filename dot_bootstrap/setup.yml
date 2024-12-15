@@ -39,5 +39,11 @@
         shell: /usr/bin/fish
       become: true
 
+    - name: Install (personal) | Download and extract neovim binary and install
+      ansible.builtin.unarchive:
+        src: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        dest: ~/bin
+        remote_src: true
+
     - name: Execute | OS specific tasks
       ansible.builtin.include_tasks: "tasks_{{ ansible_os_family | lower }}.yml"

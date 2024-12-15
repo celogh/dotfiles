@@ -5,3 +5,4 @@ distrib_packages:
   - fish
 #  - fisher # "No package matching 'fisher' is available
   - ripgrep
+  - fzf
