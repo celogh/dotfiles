@@ -1,7 +1,9 @@
 distrib_packages:
+  - libc6-dev
   - file
   - npm
   - tmux
   - fish
 #  - fisher # "No package matching 'fisher' is available
   - ripgrep
+  - fzf

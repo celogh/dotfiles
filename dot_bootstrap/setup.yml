@@ -39,5 +39,30 @@
         shell: /usr/bin/fish
       become: true
 
+    - name: Install (system-wide) | Download and extract neovim binary and install
+      ansible.builtin.unarchive:
+        src: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        dest: /tmp
+        remote_src: true
+      register: dirs
+
+    - name: Install (system-wide) | Install neovim files into Linux system directories
+      ansible.builtin.copy:
+        src: "/tmp/nvim-linux64/{{ item }}/"
+        dest: "/usr/local/"
+        remote_src: true
+        owner: root
+        group: root
+      with_items:
+        - bin
+        - lib
+        - share
+      become: true
+
+    - name: Install (system-wide) | Cleanup neovim archive
+      ansible.builtin.file:
+        path: /tmp/nvim-linux64
+        state: absent
+
     - name: Execute | OS specific tasks
       ansible.builtin.include_tasks: "tasks_{{ ansible_os_family | lower }}.yml"
